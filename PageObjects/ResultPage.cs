@@ -48,8 +48,6 @@ namespace PageObjects
 
             CurrentURL = _webDriver.Url;
 
-            //PageFactory.InitElements(driver, this);
-
             InitElements();
         }
 
@@ -63,9 +61,6 @@ namespace PageObjects
 
             ClickedCritic = critic;
 
-            //PageFactory.InitElements(driver, this);
-
-            //InitElements();
         }
 
         #endregion

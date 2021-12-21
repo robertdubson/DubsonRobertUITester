@@ -14,6 +14,8 @@ namespace PageObjects
     public class CriticsPage : IPage
     {
 
+        #region Fields
+
         private IWebDriver _webDriver;
 
         private WebDriverWait _wait;
@@ -28,6 +30,10 @@ namespace PageObjects
 
         public string CurrentURL { get; private set; }
 
+        #endregion
+
+        #region Constructors
+
         public CriticsPage(IWebDriver driver)
         {
 
@@ -40,8 +46,11 @@ namespace PageObjects
             InitElements();
 
         }
-        
-        
+
+        #endregion
+
+        #region Methods
+
         public void InitElements() {
 
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#critics-home-spotlight > div > ul > li:nth-child(1) > div > a")));
@@ -67,5 +76,7 @@ namespace PageObjects
         {
             return _webDriver.Url;
         }
+
+        #endregion
     }
 }

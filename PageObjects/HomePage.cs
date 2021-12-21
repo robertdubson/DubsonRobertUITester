@@ -12,6 +12,7 @@ namespace PageObjects
 {
     public class HomePage : IPage
     {
+        #region Fields
         public string InsertedText { get; private set; }
 
         public string CurrentURL { get; private set; }
@@ -21,20 +22,6 @@ namespace PageObjects
         private WebDriverWait _wait;
 
         public IWebElement SearchText { get { return _searchText; } set { _searchText = value; } }
-
-        public HomePage(IWebDriver webDriver)
-        {
-            _webDriver = webDriver;
-
-            _wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(1000));
-
-            GoToPage();
-
-            //PageFactory.InitElements(webDriver, this);
-
-            InitElements();
-            
-        }
 
         [FindsBy(How = How.CssSelector, Using = "#navbar > ul > li:nth-child(1) > a")]
         private IWebElement _about;
@@ -50,14 +37,30 @@ namespace PageObjects
 
         [FindsBy(How = How.CssSelector, Using = "#navbar > ul > li:nth-child(2) > a")]
         private IWebElement _criticsPage;
+
+        #endregion
+
+        #region Constructors
+
+        public HomePage(IWebDriver webDriver)
+        {
+            _webDriver = webDriver;
+
+            _wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(1000));
+
+            GoToPage();
+
+            //PageFactory.InitElements(webDriver, this);
+
+            InitElements();
+
+        }
+
         public void GoToPage() 
         {
 
             _webDriver.Navigate().GoToUrl("https://www.rottentomatoes.com/");
-            //_about = _webDriver.FindElement(By.CssSelector("#navbar > ul > li:nth-child(1) > a"));
-            //_movies = _webDriver.FindElement(By.CssSelector("#masthead-dropdown-menus > ul > li:nth-child(1) > a"));
-            //_tvShows = _webDriver.FindElement(By.CssSelector("#masthead-dropdown-menus > ul > li:nth-child(2) > a"));
-            //_searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
+
 
         }
 
@@ -70,10 +73,6 @@ namespace PageObjects
         public void InitElements() 
         {
             _about = _webDriver.FindElement(By.CssSelector("#navbar > ul > li:nth-child(1) > a"));
-            //_movies = _webDriver.FindElement(By.Id("movieMenu"));
-            //_tvShows = _webDriver.FindElement(By.Id("tvMenu"));
-            //_movies = _webDriver.FindElement(By.CssSelector("#movieMenu"));
-            //_tvShows = _webDriver.FindElement(By.CssSelector("tvMenu"));
             _movies = _webDriver.FindElement(By.XPath("/html/body/div[4]/header/nav/div[2]/ul/li[1]/a"));
             _tvShows = _webDriver.FindElement(By.XPath("/html/body/div[4]/header/nav/div[2]/ul/li[2]/a"));
             _searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
@@ -114,17 +113,11 @@ namespace PageObjects
 
         public void InsertText(string text)
         {
-
-            //GoToPage();
-            //_searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
-            //_searchText = _webDriver.FindElement(By.XPath("//*[@id='header_brand_column']/search-algolia/search-algolia-controls/input"));
-
             _searchText.SendKeys(text);
-
-            //_wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(_searchText, text));
 
             InsertedText = _searchText.Text;
         }
-
+        
+        #endregion
     }
 }

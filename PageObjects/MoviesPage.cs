@@ -13,6 +13,8 @@ namespace PageObjects
 {
     public class MoviesPage : IPage
     {
+        #region Fields
+
         public string InsertedText { get; private set; }
 
         public string CurrentURL { get; private set; }
@@ -20,15 +22,16 @@ namespace PageObjects
         [FindsBy(How = How.CssSelector, Using = "search-submit")]
         private IWebElement _searchButton;
 
+        [FindsBy(How = How.CssSelector, Using = "#navbar > search-algolia > search-algolia-controls > input")]
+        private IWebElement _searchText;
+
         private IWebDriver _webDriver;
 
         private WebDriverWait _wait;
 
-        public string GetCurrentURL()
-        {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://www.rottentomatoes.com/browse/opening"));
-            return _webDriver.Url;
-        }
+        #endregion
+
+        #region Constructors
 
         public MoviesPage(IWebDriver driver)
         {
@@ -38,15 +41,17 @@ namespace PageObjects
 
             CurrentURL = _webDriver.Url;
 
-            //PageFactory.InitElements(driver, this);
-
-            //_searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
-
             InitElements();
         }
 
-        [FindsBy(How = How.CssSelector, Using = "#navbar > search-algolia > search-algolia-controls > input")]
-        private IWebElement _searchText;
+        #endregion
+
+        #region Methods
+        public string GetCurrentURL()
+        {
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://www.rottentomatoes.com/browse/opening"));
+            return _webDriver.Url;
+        }
 
         public void InitElements()
         {
@@ -74,5 +79,6 @@ namespace PageObjects
             InsertedText = _searchText.Text;
         }
 
+        #endregion
     }
 }

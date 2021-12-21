@@ -14,6 +14,8 @@ namespace PageObjects
     
     public class TVShowsPage : IPage
     {
+        #region Fields
+
         public string InsertedText { get; private set; }
 
         public string CurrentURL { get; private set; }
@@ -24,15 +26,16 @@ namespace PageObjects
         [FindsBy(How = How.CssSelector, Using = "#main-page-content > div > section.search__main.layout__column.layout__column--main > search-page-result-container > nav > ul > li.js-search-filter.searchNav__filter.searchNav__filter--active > span")]
         private IWebElement _tvShowsButton;
 
+        [FindsBy(How = How.CssSelector, Using = "#search-term")]
+        private IWebElement _searchText;
+
         private IWebDriver _webDriver;
 
         private WebDriverWait _wait;
 
-        public string GetCurrentURL()
-        {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://www.rottentomatoes.com/top-tv"));
-            return _webDriver.Url;
-        }
+        #endregion
+
+        #region Constructors
 
         public TVShowsPage(IWebDriver webDriver)
         {
@@ -47,8 +50,16 @@ namespace PageObjects
             InitElements();
         }
 
-        [FindsBy(How = How.CssSelector, Using = "#search-term")]
-        private IWebElement _searchText;
+        #endregion
+
+        #region Methods
+
+        public string GetCurrentURL()
+        {
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://www.rottentomatoes.com/top-tv"));
+            return _webDriver.Url;
+        }
+
 
         public ResultPage Search(string text)
         {
@@ -75,5 +86,7 @@ namespace PageObjects
 
             InsertedText = _searchText.Text;
         }
+
+        #endregion
     }
 }
