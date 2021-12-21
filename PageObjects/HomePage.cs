@@ -3,37 +3,81 @@ using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 namespace PageObjects
 {
     public class HomePage : IPage
     {
         public string InsertedText { get; private set; }
 
+        public string CurrentURL { get; private set; }
+
         private IWebDriver _webDriver;
+
+        private WebDriverWait _wait;
+
+        public IWebElement SearchText { get { return _searchText; } set { _searchText = value; } }
 
         public HomePage(IWebDriver webDriver)
         {
             _webDriver = webDriver;
 
-            PageFactory.InitElements(webDriver, this);
+            _wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(1000));
+
+            GoToPage();
+
+            //PageFactory.InitElements(webDriver, this);
+
+            InitElements();
+            
         }
 
         [FindsBy(How = How.CssSelector, Using = "#navbar > ul > li:nth-child(1) > a")]
         private IWebElement _about;
 
-        [FindsBy(How = How.CssSelector, Using = "#masthead-dropdown-menus > ul > li:nth-child(1) > a")]
+        [FindsBy(How = How.XPath, Using = "/ html / body / div[4] / header / nav / div[2] / ul / li[1] / a")]
         private IWebElement _movies;
 
-        [FindsBy(How = How.CssSelector, Using = "#masthead-dropdown-menus > ul > li:nth-child(2) > a")]
+        [FindsBy(How = How.XPath, Using = "/html/body/div[4]/header/nav/div[2]/ul/li[2]/a")]
         private IWebElement _tvShows;
-        
+
         [FindsBy(How = How.CssSelector, Using = "#navbar > search-algolia > search-algolia-controls > input")]
         private IWebElement _searchText;
+
+        [FindsBy(How = How.CssSelector, Using = "#navbar > ul > li:nth-child(2) > a")]
+        private IWebElement _criticsPage;
         public void GoToPage() 
         {
 
             _webDriver.Navigate().GoToUrl("https://www.rottentomatoes.com/");
-            
+            //_about = _webDriver.FindElement(By.CssSelector("#navbar > ul > li:nth-child(1) > a"));
+            //_movies = _webDriver.FindElement(By.CssSelector("#masthead-dropdown-menus > ul > li:nth-child(1) > a"));
+            //_tvShows = _webDriver.FindElement(By.CssSelector("#masthead-dropdown-menus > ul > li:nth-child(2) > a"));
+            //_searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
+
+        }
+
+        public string GetCurrentURL()
+        {
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://www.rottentomatoes.com/"));
+            return _webDriver.Url;
+        }
+
+        public void InitElements() 
+        {
+            _about = _webDriver.FindElement(By.CssSelector("#navbar > ul > li:nth-child(1) > a"));
+            //_movies = _webDriver.FindElement(By.Id("movieMenu"));
+            //_tvShows = _webDriver.FindElement(By.Id("tvMenu"));
+            //_movies = _webDriver.FindElement(By.CssSelector("#movieMenu"));
+            //_tvShows = _webDriver.FindElement(By.CssSelector("tvMenu"));
+            _movies = _webDriver.FindElement(By.XPath("/html/body/div[4]/header/nav/div[2]/ul/li[1]/a"));
+            _tvShows = _webDriver.FindElement(By.XPath("/html/body/div[4]/header/nav/div[2]/ul/li[2]/a"));
+            _searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
+            _criticsPage = _webDriver.FindElement(By.CssSelector("#navbar > ul > li:nth-child(2) > a"));
         }
 
         public AboutPage GoToAboutPage() 
@@ -41,6 +85,14 @@ namespace PageObjects
             _about.Click();
 
             return new AboutPage(_webDriver);
+        }
+
+        public CriticsPage GoToCriticsPage() {
+
+            _criticsPage.Click();
+            
+            return new CriticsPage(_webDriver);
+
         }
 
         public MoviesPage GoToMoviesPage() 
@@ -62,7 +114,14 @@ namespace PageObjects
 
         public void InsertText(string text)
         {
+
+            //GoToPage();
+            //_searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
+            //_searchText = _webDriver.FindElement(By.XPath("//*[@id='header_brand_column']/search-algolia/search-algolia-controls/input"));
+
             _searchText.SendKeys(text);
+
+            //_wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(_searchText, text));
 
             InsertedText = _searchText.Text;
         }

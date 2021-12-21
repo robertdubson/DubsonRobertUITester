@@ -11,5 +11,11 @@ namespace PageObjects
         void InsertText(string text);
 
         string InsertedText { get; }
+
+        void InitElements();
+
+        string CurrentURL { get;  }
+
+        string GetCurrentURL();
     }
 }

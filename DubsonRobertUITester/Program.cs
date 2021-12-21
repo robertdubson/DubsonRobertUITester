@@ -13,17 +13,8 @@ namespace DubsonRobertUITester
     {
         static void Main(string[] args)
         {
-            IWebDriver driver = new ChromeDriver();
-
-            driver.Navigate().GoToUrl("https://ecampus.kpi.ua/home");
-
-            IWebElement element = driver.FindElement(By.ClassName("form-control"));
-
-            element.SendKeys("my login");
-
-            String writtenLogin = element.Text;
-
-            Assert.IsTrue(writtenLogin=="my login");
+            //Tests test = new Tests();
+            //test.PerformTesting();
         }
     }
 }

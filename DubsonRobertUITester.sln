@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DubsonRobertUITester", "Dub
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageObjects", "PageObjects\PageObjects.csproj", "{AB22C693-CF39-4FAF-B6F0-0FE91296EEC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{EFBFF7A2-D789-4765-89AF-5C76E9606BC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AB22C693-CF39-4FAF-B6F0-0FE91296EEC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB22C693-CF39-4FAF-B6F0-0FE91296EEC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB22C693-CF39-4FAF-B6F0-0FE91296EEC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFBFF7A2-D789-4765-89AF-5C76E9606BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFBFF7A2-D789-4765-89AF-5C76E9606BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFBFF7A2-D789-4765-89AF-5C76E9606BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFBFF7A2-D789-4765-89AF-5C76E9606BC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
