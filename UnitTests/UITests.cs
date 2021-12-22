@@ -95,7 +95,7 @@ namespace UnitTests
         [AllureTag("UserInterface")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureOwner("Robert Dubson")]
-        [AllureSubSuite("Navigation")]
+        [AllureSubSuite("TitleCheck")]
         public void CheckCriticsName() {
 
             _home = new HomePage(_webDriver);
