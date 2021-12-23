@@ -27,10 +27,10 @@ namespace PageObjects
 
         public string CurrentURL { get; private set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#navbar > search-algolia > search-algolia-controls > input")]
+        [FindsBy(How = How.CssSelector, Using = ".search-text")]
         private IWebElement _searchText;
 
-        [FindsBy(How = How.CssSelector, Using = "#main-page-content > div > section.search__main.layout__column.layout__column--main > search-page-result-container > search-page-result:nth-child(2) > ul > search-page-media-row:nth-child(1) > a:nth-child(2)")]
+        [FindsBy(How = How.CssSelector, Using = "search-page-media-row , .unset")]
         private IWebElement _firstMovie;
 
         [FindsBy(How = How.ClassName, Using = "scoreboard__title")]
@@ -74,10 +74,10 @@ namespace PageObjects
 
         public void InitElements()
         {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input")));
-            _searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#main-page-content > div > section.search__main.layout__column.layout__column--main > search-page-result-container > search-page-result:nth-child(2) > ul > search-page-media-row:nth-child(1) > a:nth-child(2)")));
-            _firstMovie = _webDriver.FindElement(By.CssSelector("#main-page-content > div > section.search__main.layout__column.layout__column--main > search-page-result-container > search-page-result:nth-child(2) > ul > search-page-media-row:nth-child(1) > a:nth-child(2)"));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(".search-text")));
+            _searchText = _webDriver.FindElement(By.CssSelector(".search-text"));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("search-page-media-row , .unset")));
+            _firstMovie = _webDriver.FindElement(By.CssSelector("search-page-media-row , .unset"));
         }
 
         
@@ -98,7 +98,7 @@ namespace PageObjects
 
         public void InsertText(string text)
         {
-            _searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
+            _searchText = _webDriver.FindElement(By.CssSelector(".search-text"));
 
             _searchText.SendKeys(text);
 
@@ -107,9 +107,9 @@ namespace PageObjects
 
         public string GetCriticName() {
 
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#main-page-content > div > section > section > div.critic-person__bio__summary > div > h1")));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(".critic-person__bio__summary div , h1")));
 
-            return _webDriver.FindElement(By.CssSelector("#main-page-content > div > section > section > div.critic-person__bio__summary > div > h1")).GetAttribute("text").ToString();
+            return _webDriver.FindElement(By.CssSelector(".critic-person__bio__summary div , h1")).GetAttribute("text").ToString();
 
         }
 

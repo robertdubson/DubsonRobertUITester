@@ -20,10 +20,10 @@ namespace PageObjects
 
         private WebDriverWait _wait;
 
-        [FindsBy(How = How.CssSelector, Using = "#critics-home-spotlight > div > ul > li:nth-child(1) > div > a")]
+        [FindsBy(How = How.CssSelector, Using = ".critics-home-spotlight__aside , .critics-home-spotlight__critic")]
         private IWebElement _criticName;
 
-        [FindsBy(How = How.CssSelector, Using = "#navbar > search-algolia > search-algolia-controls > input")]
+        [FindsBy(How = How.CssSelector, Using = ".search-text")]
         private IWebElement _searchTextBox;
 
         public string InsertedText { get; private set; }
@@ -53,8 +53,8 @@ namespace PageObjects
 
         public void InitElements() {
 
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#critics-home-spotlight > div > ul > li:nth-child(1) > div > a")));
-            _criticName = _webDriver.FindElement(By.CssSelector("#critics-home-spotlight > div > ul > li:nth-child(1) > div > a"));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(".critics-home-spotlight__aside , .critics-home-spotlight__critic")));
+            _criticName = _webDriver.FindElement(By.CssSelector(".critics-home-spotlight__aside , .critics-home-spotlight__critic"));
 
         }
 

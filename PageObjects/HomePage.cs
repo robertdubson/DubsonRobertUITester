@@ -23,19 +23,19 @@ namespace PageObjects
 
         public IWebElement SearchText { get { return _searchText; } set { _searchText = value; } }
 
-        [FindsBy(How = How.CssSelector, Using = "#navbar > ul > li:nth-child(1) > a")]
+        [FindsBy(How = How.CssSelector, Using = "a[href='/about']")]
         private IWebElement _about;
 
-        [FindsBy(How = How.XPath, Using = "/ html / body / div[4] / header / nav / div[2] / ul / li[1] / a")]
+        [FindsBy(How = How.CssSelector, Using = ".masthead__menu-header--active .masthead__menu-header-title")]
         private IWebElement _movies;
 
-        [FindsBy(How = How.XPath, Using = "/html/body/div[4]/header/nav/div[2]/ul/li[2]/a")]
+        [FindsBy(How = How.CssSelector, Using = ".masthead__menu-header-title[href='https://www.rottentomatoes.com/top-tv']")]
         private IWebElement _tvShows;
 
-        [FindsBy(How = How.CssSelector, Using = "#navbar > search-algolia > search-algolia-controls > input")]
+        [FindsBy(How = How.CssSelector, Using = ".search-text")]
         private IWebElement _searchText;
 
-        [FindsBy(How = How.CssSelector, Using = "#navbar > ul > li:nth-child(2) > a")]
+        [FindsBy(How = How.CssSelector, Using = ".masthead__header-link[href='/critics']")]
         private IWebElement _criticsPage;
 
         #endregion
@@ -49,8 +49,6 @@ namespace PageObjects
             _wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(1000));
 
             GoToPage();
-
-            //PageFactory.InitElements(webDriver, this);
 
             InitElements();
 
@@ -72,11 +70,11 @@ namespace PageObjects
 
         public void InitElements() 
         {
-            _about = _webDriver.FindElement(By.CssSelector("#navbar > ul > li:nth-child(1) > a"));
-            _movies = _webDriver.FindElement(By.XPath("/html/body/div[4]/header/nav/div[2]/ul/li[1]/a"));
-            _tvShows = _webDriver.FindElement(By.XPath("/html/body/div[4]/header/nav/div[2]/ul/li[2]/a"));
-            _searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
-            _criticsPage = _webDriver.FindElement(By.CssSelector("#navbar > ul > li:nth-child(2) > a"));
+            _about = _webDriver.FindElement(By.CssSelector("a[href='/about']"));
+            _movies = _webDriver.FindElement(By.CssSelector(".masthead__menu-header-title[href='/browse/opening/']"));
+            _tvShows = _webDriver.FindElement(By.CssSelector(".masthead__menu-header-title[href='https://www.rottentomatoes.com/top-tv']"));
+            _searchText = _webDriver.FindElement(By.CssSelector(".search-text"));
+            _criticsPage = _webDriver.FindElement(By.CssSelector(".masthead__header-link[href='/critics']"));
         }
 
         public AboutPage GoToAboutPage() 

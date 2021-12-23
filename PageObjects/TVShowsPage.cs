@@ -20,11 +20,8 @@ namespace PageObjects
 
         public string CurrentURL { get; private set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#search-form > div > div > div.input-group > div.input-group-btn > button > em")]
+        [FindsBy(How = How.CssSelector, Using = ".glyphicon-search")]
         private IWebElement _searchButton;
-
-        [FindsBy(How = How.CssSelector, Using = "#main-page-content > div > section.search__main.layout__column.layout__column--main > search-page-result-container > nav > ul > li.js-search-filter.searchNav__filter.searchNav__filter--active > span")]
-        private IWebElement _tvShowsButton;
 
         [FindsBy(How = How.CssSelector, Using = "#search-term")]
         private IWebElement _searchText;
@@ -74,13 +71,12 @@ namespace PageObjects
         {
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#search-term")));
             _searchText = _webDriver.FindElement(By.CssSelector("#search-term"));
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#search-form > div > div > div.input-group > div.input-group-btn > button > em")));
-            _searchButton = _webDriver.FindElement(By.CssSelector("#search-form > div > div > div.input-group > div.input-group-btn > button > em"));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(".glyphicon-search")));
+            _searchButton = _webDriver.FindElement(By.CssSelector(".glyphicon-search"));
         }
 
         public void InsertText(string text)
         {
-            //_searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
 
             _searchText.SendKeys(text);
 

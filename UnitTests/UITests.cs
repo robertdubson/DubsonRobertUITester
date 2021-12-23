@@ -46,7 +46,7 @@ namespace UnitTests
         {
             _home = new HomePage(_webDriver);
             AboutPage about = _home.GoToAboutPage();
-            Assert.IsTrue(about.GetCurrentURL() == "https://www.rottentomatoes.com/about#whatisthetomatometer");
+            Assert.AreEqual(about.GetCurrentURL(), "https://www.rottentomatoes.com/about#whatisthetomatometer");
         }
 
 
@@ -59,7 +59,7 @@ namespace UnitTests
         {
             _home = new HomePage(_webDriver);
             MoviesPage movies = _home.GoToMoviesPage();
-            Assert.IsTrue(movies.GetCurrentURL() == "https://www.rottentomatoes.com/browse/opening");
+            Assert.AreEqual(movies.GetCurrentURL(), "https://www.rottentomatoes.com/browse/opening");
 
         }
 
@@ -72,8 +72,7 @@ namespace UnitTests
         {
             _home = new HomePage(_webDriver);
             TVShowsPage tv = _home.GoToTVShowsPage();
-            Assert.IsTrue(tv.GetCurrentURL()== "https://www.rottentomatoes.com/top-tv");  
-
+            Assert.AreEqual(tv.GetCurrentURL(), "https://www.rottentomatoes.com/top-tv");
         }
 
 
@@ -86,8 +85,7 @@ namespace UnitTests
 
             _home = new HomePage(_webDriver);
             CriticsPage result = _home.GoToCriticsPage();
-            Assert.IsTrue(result.GetCurrentURL()=="https://www.rottentomatoes.com/critics");
-
+            Assert.AreEqual(result.GetCurrentURL(), "https://www.rottentomatoes.com/critics");
         }
 
 
@@ -101,7 +99,7 @@ namespace UnitTests
             _home = new HomePage(_webDriver);
             CriticsPage criticsPage = _home.GoToCriticsPage();
             ResultPage res = criticsPage.ClickOnFirstCritic();
-            Assert.IsTrue(res.ClickedCritic==res.GetCriticName());
+            Assert.AreEqual(res.ClickedCritic, res.GetCriticName());
 
         }
 
@@ -112,12 +110,13 @@ namespace UnitTests
         [AllureSubSuite("Search")]
         public void SearchMovieFromAboutPage()
         {
-            //GoToHomePage();
+
             _home = new HomePage(_webDriver);
             AboutPage about = _home.GoToAboutPage();
             ResultPage result = about.Search("Godfather");
             result.FindTheTitle(); 
             Assert.IsTrue(result.FirstMovieTitle.Contains("Godfather"));
+
         }
 
         [Test(Description = "Search for a movie from MoviesPage")]
@@ -127,7 +126,7 @@ namespace UnitTests
         [AllureSubSuite("Search")]
         public void SearchMovieFromMoviesPage()
         {
-            //GoToHomePage();
+
             _home = new HomePage(_webDriver);
             MoviesPage movies = _home.GoToMoviesPage();
             ResultPage result = movies.Search("Forrest Gump");

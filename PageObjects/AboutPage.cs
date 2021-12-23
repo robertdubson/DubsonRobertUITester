@@ -19,10 +19,10 @@ namespace PageObjects
         public string CurrentURL { get; private set; }
 
 
-        [FindsBy(How = How.CssSelector, Using = "search-submit")]
+        [FindsBy(How = How.ClassName, Using = "search-submit")]
         private IWebElement _searchButton;
 
-        [FindsBy(How = How.CssSelector, Using = "#navbar > search-algolia > search-algolia-controls > input")]
+        [FindsBy(How = How.CssSelector, Using = ".search-text")]
         private IWebElement _searchText;
 
 
@@ -47,8 +47,8 @@ namespace PageObjects
 
         public void InitElements()
         {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input")));
-            _searchText = _webDriver.FindElement(By.CssSelector("#navbar > search-algolia > search-algolia-controls > input"));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(".search-text")));
+            _searchText = _webDriver.FindElement(By.CssSelector(".search-text"));
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("search-submit")));
             _searchButton = _webDriver.FindElement(By.ClassName("search-submit"));
         }
